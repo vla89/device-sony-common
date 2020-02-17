@@ -20,9 +20,13 @@ ipa-hal := hardware/qcom/data/ipacfg-mgr/sdm845
 display-hal := hardware/qcom/display/sde
 
 ifneq ($(filter $(QCOM_NEW_MEDIA_PLATFORM), $(TARGET_BOARD_PLATFORM)),)
-QCOM_MEDIA_ROOT := hardware/qcom/media/sm8150
+  QCOM_MEDIA_ROOT := hardware/qcom/media/sm8150
 else
-QCOM_MEDIA_ROOT := hardware/qcom/media/sdm660-libion
+  ifeq ($(SOMC_KERNEL_VERSION),4.14)
+    QCOM_MEDIA_ROOT := hardware/qcom/media/sdm660-libion
+  else
+    QCOM_MEDIA_ROOT := hardware/qcom/media/msm8998
+  endif
 endif
 
 OMX_VIDEO_PATH := mm-video-v4l2

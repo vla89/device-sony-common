@@ -1,5 +1,10 @@
 # Vendor version
+ifeq ($(SOMC_KERNEL_VERSION),4.14)
 TARGET_VENDOR_VERSION := v3
+else
+# HACK: Stay on Pie 4.9 blobs
+TARGET_VENDOR_VERSION := v9
+endif
 
 ifneq (,$(SONY_BUILD_ODM))
 

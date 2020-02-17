@@ -20,10 +20,6 @@ PRODUCT_PACKAGES += \
     cdsprpcd.rc \
     cnss-daemon.rc \
     ipacm.rc \
-    imsdatadaemon.rc \
-    imsqmidaemon.rc \
-    imsrcsd.rc \
-    ims_rtp_daemon.rc \
     irsc_util.rc \
     mlog_qmi.rc \
     msm_irq.rc \
@@ -32,7 +28,6 @@ PRODUCT_PACKAGES += \
     per-proxy.rc \
     per-service.rc \
     qmuxd.rc \
-    qrtr.rc \
     qseecom.rc \
     rild2.rc \
     rmt_storage.rc \
@@ -43,6 +38,15 @@ PRODUCT_PACKAGES += \
     ta_qmi.rc \
     tftp_server.rc \
     wpa_supplicant.rc
+
+ifeq ($(SOMC_KERNEL_VERSION),4.14)
+PRODUCT_PACKAGES += \
+    imsdatadaemon.rc \
+    imsqmidaemon.rc \
+    imsrcsd.rc \
+    ims_rtp_daemon.rc \
+    qrtr.rc
+endif
 
 # Common init scripts
 PRODUCT_PACKAGES += \

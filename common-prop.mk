@@ -136,7 +136,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Property to choose between virtual/external wfd display
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.wfd.virtual=0
-    
+
+ifeq ($(SOMC_KERNEL_VERSION),4.14)
 # Display properties
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.demo.hdmirotationlock=false \
@@ -148,6 +149,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     vendor.display.enable_default_color_mode=1 \
     vendor.display.enable_optimize_refresh=1 \
     vendor.display.disable_ui_3d_tonemap=1
+endif
 
 # Wi-Fi interface name
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -171,8 +173,14 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.opengles.version=196610
 
 # Vendor version
+ifeq ($(SOMC_KERNEL_VERSION),4.9)
+# HACK: Stay on Pie 4.9 blobs
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.odm.expect.version=9_$(SOMC_KERNEL_VERSION)_$(SOMC_PLATFORM)_$(TARGET_VENDOR_VERSION)
+else
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.odm.expect.version=$(PLATFORM_VERSION)_$(SOMC_KERNEL_VERSION)_$(SOMC_PLATFORM)_$(TARGET_VENDOR_VERSION)
+endif
 
 # Priv-app permisisons
 PRODUCT_PROPERTY_OVERRIDES += \
